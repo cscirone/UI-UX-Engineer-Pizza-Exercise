@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <title>Pizza Time - Pizza Builder</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Krona+One&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../styles/pizza_builder.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="../scripts/pizza_builder.js"></script>
+
+    <body>
+
+    <!--<img src="../assets/pizza_time_logo.jpg" alt="Pizza Time" style="width:100%">
+
+    <div class="">
+    <h1>This is a Heading</h1>
+    <p>This is a paragraph.</p>
+    <p>This is another paragraph.</p>
+    </div>-->
+
+    <div class="navigation-container">
+        <div class="navigation-branding-container">
+            <p class="">Pizza Time</p>
+            <img src="../assets/pizza_time_logo.jpg" alt="Pizza Time" width="60" height="60">
+        </div>
+        <div class="navigation-button">
+            <button type="button">Order</button>
+        </div>
+    </div>
+
+    <div class="pizza-builder-panels">
+        <div class="pizza-display">
+            <div class="size-indicator">
+                <p id="size-indicator">S</p>
+            </div>
+            <div class="pizza-image-container">
+                <img id="pizza-image" src="../assets/pizza.png" alt="Pizza" width="683" height="370" style="z-index: 0">
+                <img id="extra-cheese-image" class="hide" src="../assets/extra_cheese.png" alt="Pizza" width="683" height="370" style="z-index: 1">
+                <img id="pepperoni-image" class="hide" src="../assets/pepperoni.png" alt="Pizza" width="683" height="370" style="z-index: 2">
+                <img id="sausage-image" class="hide" src="../assets/sausage.png" alt="Pizza" width="683" height="370" style="z-index: 3">
+                <img id="bacon-image" class="hide" src="../assets/bacon.png" alt="Pizza" width="683" height="370" style="z-index: 4">
+                <img id="black-olives-image" class="hide" src="../assets/black_olives.png" alt="Pizza" width="683" height="370" style="z-index: 5">
+                <img id="mushrooms-image" class="hide" src="../assets/mushrooms.png" alt="Pizza" width="683" height="370" style="z-index: 6">
+                <img id="pineapple-image" class="hide" src="../assets/pineapple.png" alt="Pizza" width="683" height="370" style="z-index: 7">
+                <img id="tomatoes-image" class="hide" src="../assets/tomatoes.png" alt="Pizza" width="683" height="370" style="z-index: 8">
+            </div>
+        </div>
+
+        <div class="topping-selection">
+            <div class="topping-selection-header">
+                <p>Pizza Builder</p>
+                <div class="topping-category-buttons">
+                    <div class="topping-category-button-active" id="size">
+                        <button type="button" onclick="setActiveCategory(event)">Size</button>
+                    </div>
+                    <div class="topping-category-button" id="sauce">
+                        <button type="button" onclick="setActiveCategory(event)">Suace</button>
+                    </div>
+                    <div class="topping-category-button" id="cheese">
+                        <button type="button" onclick="setActiveCategory(event)">Cheese</button>
+                    </div>
+                    <div class="topping-category-button" id="meats">
+                        <button type="button" onclick="setActiveCategory(event)">Meats</button>
+                    </div>
+                    <div class="topping-category-button" id="veggies">
+                        <button type="button" onclick="setActiveCategory(event)">Veggies</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="selection-list" id="size-selection-list">
+                <div class="selection-list-header">
+                    <p>Size</p>
+                </div>
+                <div class="selection-list-options">
+                    <div class="selection-list-option">
+                        <input type="radio" name="size" id="size-small" onclick="setSizeDisplay('S')" checked>
+                        <label for="size-small" class="selection-list-option-label">Small (S)</label>
+                    </div>
+                    <div class="selection-list-option">
+                        <input type="radio" name="size" id="size-medium">
+                        <label for="size-medium" class="selection-list-option-label" onclick="setSizeDisplay('M')">Medium (M)</label>
+                    </div>
+                    <div class="selection-list-option">
+                        <input type="radio" name="size" id="size-large">
+                        <label for="size-large" class="selection-list-option-label" onclick="setSizeDisplay('L')">Large (L)</label>
+                    </div>
+                    <div class="selection-list-option">
+                        <input type="radio" name="size" id="size-xlarge">
+                        <label for="size-xlarge" class="selection-list-option-label" onclick="setSizeDisplay('X')">Extra Large (X)</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="selection-list hide" id="sauce-selection-list">
+                <div class="selection-list-header">
+                    <p>Sauce</p>
+                </div>
+                <div class="selection-list-options">
+                    <div class="selection-list-option">
+                        <input type="radio" name="sauce" id="regular-sauce" checked>
+                        <label for="regular-sauce" class="selection-list-option-label">Regular Sauce</label>
+                    </div>
+                    <div class="selection-list-option">
+                        <input type="radio" name="sauce" id="no-sauce">
+                        <label for="no-sauce" class="selection-list-option-label">No Sauce</label>
+                    </div>
+                    <div class="selection-list-option">
+                        <input type="radio" name="sauce" id="extra-sauce">
+                        <label for="extra-sauce" class="selection-list-option-label">Extra Sauce</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="selection-list hide" id="cheese-selection-list">
+                <div class="selection-list-header">
+                    <p>Cheese</p>
+                </div>
+                <div class="selection-list-options">
+                    <div class="selection-list-option">
+                        <input type="radio" name="cheese" id="regular-cheese" checked>
+                        <label for="regular-cheese" class="selection-list-option-label">Regular Cheese</label>
+                    </div>
+                    <div class="selection-list-option">
+                        <input type="radio" name="cheese" id="no-cheese" >
+                        <label for="no-cheese" class="selection-list-option-label">No Cheese</label>
+                    </div>
+                    <div class="selection-list-option">
+                        <input type="radio" name="cheese" id="extra-cheese" onclick="toggleImage('extra-cheese-image')">
+                        <label for="extra-cheese" class="selection-list-option-label">Extra Cheese</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="selection-list hide" id="meats-selection-list">
+                <div class="selection-list-header">
+                    <p>Meats</p>
+                </div>
+                <div class="selection-list-options">
+                    <div class="selection-list-option">
+                        <input type="checkbox" name="meats" id="pepperoni">
+                        <label for="pepperoni" class="selection-list-option-label" onclick="toggleImage('pepperoni-image')">Pepperoni</label>
+                    </div>
+                    <div class="selection-list-option">
+                        <input type="checkbox" name="meats" id="sausage">
+                        <label for="sausage" class="selection-list-option-label" onclick="toggleImage('sausage-image')">Sausage</label>
+                    </div>
+                    <div class="selection-list-option">
+                        <input type="checkbox" name="meats" id="bacon" onclick="toggleImage('bacon-image')">
+                        <label for="bacon" class="selection-list-option-label">Bacon</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="selection-list hide" id="veggies-selection-list">
+                <div class="selection-list-header">
+                    <p>Veggies</p>
+                </div>
+                <div class="selection-list-options">
+                    <div class="selection-list-option">
+                        <input type="checkbox" name="veggies" id="black-olives">
+                        <label for="black-olives" class="selection-list-option-label" onclick="toggleImage('black-olives-image')">Black Olives</label>
+                    </div>
+                    <div class="selection-list-option">
+                        <input type="checkbox" name="veggies" id="mushrooms">
+                        <label for="mushrooms" class="selection-list-option-label" onclick="toggleImage('mushrooms-image')">Mushrooms</label>
+                    </div>
+                    <div class="selection-list-option">
+                        <input type="checkbox" name="veggies" id="pineapple" onclick="toggleImage('pineapple-image')">
+                        <label for="pineapple" class="selection-list-option-label">Pineapple</label>
+                    </div>
+                    <div class="selection-list-option">
+                        <input type="checkbox" name="veggies" id="tomatoes" onclick="toggleImage('tomatoes-image')">
+                        <label for="tomatoes" class="selection-list-option-label">Tomatoes</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quantity-and-confirm">
+                <div class="pizza-name-field-container">
+                    <label for="pizza-name-field">Pizza Name</label>
+                    <input type="text" id="pizza-name-field" name="pizza-name" placeholder="My Pizza Name">
+                </div>
+
+                <div class="quantity-container">
+                    <div class="quantity-button">
+                        <button type="button" id="quantity-remove">-</button>
+                    </div>
+                    <p>1</p>
+                    <div class="quantity-button">
+                        <button type="button" id="quantity-add">+</button>
+                    </div>
+                </div>
+
+                <div class="submit-pizza-button">
+                    <button type="submit" id="submit-pizza">Add to Order</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    </body>
+</html>
